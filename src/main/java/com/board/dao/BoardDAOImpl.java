@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.board.domain.BoardVO;
 
 @Repository
-public class BoardDAOlmpl implements BoardDAO {
+public class BoardDAOImpl implements BoardDAO {
 
 	@Inject
 	private SqlSession sql;
@@ -69,9 +69,11 @@ public class BoardDAOlmpl implements BoardDAO {
 		return sql.selectList(namespace + ".listPage", data);
 	}
 
+	// 게시물 목록 + 페이징 + 검색
 	@Override
-	public List<BoardVO> listPageSearch(int displayPost, int postNum, String searchType, String keyword) throws Exception {
-		// TODO Auto-generated method stub
+	public List<BoardVO> listPageSearch(
+			int displayPost, int postNum, String searchType, String keyword) throws Exception {
+
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		
 		data.put("displayPost", displayPost);
@@ -88,7 +90,7 @@ public class BoardDAOlmpl implements BoardDAO {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		
-		data.put("searchType", searchType);
+		data.put("searchType" , searchType);
 		data.put("keyword", keyword);
 		
 		return sql.selectOne(namespace + ".searchCount", data);

@@ -10,7 +10,7 @@ import com.board.dao.BoardDAO;
 import com.board.domain.BoardVO;
 
 @Service
-public class BoardServicelmpl implements BoardService {
+public class BoardServiceImpl implements BoardService {
 
 	@Inject
 	private BoardDAO dao;
@@ -61,11 +61,11 @@ public class BoardServicelmpl implements BoardService {
 		return dao.listPage(displayPost, postNum);
 	}
 
+	// 게시물 목록 + 페이징 + 검색
 	@Override
-	public List<BoardVO> listPageSearch(int displayPost, int postNum, String searchType, String keyword)
-			throws Exception {
-		// TODO Auto-generated method stub
-		return dao.listPageSearch(displayPost, postNum, searchType, keyword);
+	public List<BoardVO> listPageSearch(
+			int displayPost, int postNum, String searchType, String keyword) throws Exception {
+		return  dao.listPageSearch(displayPost, postNum, searchType, keyword);
 	}
 
 	@Override
