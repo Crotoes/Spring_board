@@ -39,4 +39,10 @@ public class ReplyServiceImpl implements ReplyService {
 		dao.delete(vo);
 	}
 
+	@Override
+	public ReplyVO replySelect(ReplyVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.replySelect(vo);
+	}
+
 }

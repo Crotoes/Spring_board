@@ -43,7 +43,7 @@ public class BoardController {
 	
 	// 게시물 작성
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String posttWirte(BoardVO vo) throws Exception {
+	public String postWirte(BoardVO vo) throws Exception {
 		 service.write(vo);
 		 
 		 return "redirect:/board/list";
@@ -56,7 +56,9 @@ public class BoardController {
 		BoardVO vo = service.view(bno);
 		 
 		model.addAttribute("view", vo);
+		 
 		
+		// 댓글 조회
 		List<ReplyVO> reply = null;
 		reply = replyService.list(bno);
 		model.addAttribute("reply", reply);
@@ -89,6 +91,8 @@ public class BoardController {
 
 		return "redirect:/board/list";
 	} 
+	
+	
 	
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
@@ -178,19 +182,19 @@ public class BoardController {
 			@RequestParam(value = "searchType",required = false, defaultValue = "title") String searchType,
 			@RequestParam(value = "keyword",required = false, defaultValue = "") String keyword
 			) throws Exception {
-
+	
 		
 		Page page = new Page();
 		
 		page.setNum(num);
-//		page.setCount(service.count());
+		//page.setCount(service.count());		
 		page.setCount(service.searchCount(searchType, keyword));
 		
-		//검색 타입과 검색어
-//		page.setSearchTypekeyword(searchType, keyword);
+		// 검색 타입과 검색어
+		//page.setSearchTypeKeyword(searchType, keyword);
 		page.setSearchType(searchType);
 		page.setKeyword(keyword);
-		
+				
 		List<BoardVO> list = null; 
 		//list = service.listPage(page.getDisplayPost(), page.getPostNum());
 		list = service.listPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
@@ -199,8 +203,10 @@ public class BoardController {
 		model.addAttribute("page", page);
 		model.addAttribute("select", num);
 		
-//		model.addAttribute("searchType", searchType);
-//		model.addAttribute("keyword", keyword);
+		//model.addAttribute("searchType", searchType);
+		//model.addAttribute("keyword", keyword);
+		
+		
 		
 	}
 
